@@ -18,8 +18,3 @@ def characteristic_polynomial(matrix):
             eigenvectors.append(vector)
 
     return [eigenvalues, eigenvectors]
-
-
-
-matrix_A = Matrix([[2, 1, 2], [1, 2, 0], [-2, -2, -2]])
-characteristic_polynomial(matrix_A)

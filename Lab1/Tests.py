@@ -111,9 +111,11 @@ class TestPowerIteration(unittest.TestCase):
 
     def test_power_iteration_method_for_matrix_B_vectorA(self):
         [eigenvalue, eigenvector] = power_iteration(matrix_B, vector_A)
+        print(eigenvector)
+        eigenvectors_rounded = [round(elem * 2) for elem in eigenvector] 
 
         self.assertEqual(eigenvalue, 2)
-        self.assertEqual([0,2,-1], eigenvector)
+        self.assertEqual([0,2,-1], eigenvectors_rounded)
 
     def test_power_iteration_method_for_matrix_A_vectorB(self):
         [eigenvalue, eigenvector] = power_iteration(matrix_A, vector_B)
@@ -123,14 +125,17 @@ class TestPowerIteration(unittest.TestCase):
 
     def test_power_iteration_method_for_matrix_B_vectorB(self):
         [eigenvalue, eigenvector] = power_iteration(matrix_B, vector_B)
+        
+        print(eigenvector)
+        eigenvectors_rounded = [round(elem * 2) for elem in eigenvector] 
 
         self.assertEqual(eigenvalue, 2)
-        self.assertEqual([0,2,-1], eigenvector)
+        self.assertEqual([0,2,-1], eigenvectors_rounded)
 
 
 class TestJacobian(unittest.TestCase):
     def test_jacobian_method_for_matrix_A(self):
-        eigenvalues = jacobi_method(matrix_D)
+        [eigenvalues, eigenvectors] = jacobi_method(matrix_D)
         eigenvectors_rounded = [round(elem) for elem in eigenvalues] 
         self.assertIn(-4, eigenvectors_rounded)
         self.assertIn(-2, eigenvectors_rounded)

@@ -14,6 +14,7 @@ def jacobi_method(A, tol=1e-6, max_iterations=1000):
                     max_off_diag = abs(A[i, j])
                     p, q = i, j
 
+        # Check for convergence
         if max_off_diag < tol or i >= max_iterations:
             break
 
@@ -30,4 +31,4 @@ def jacobi_method(A, tol=1e-6, max_iterations=1000):
 
 
     # Extract eigenvalues from the diagonal of A
-    return [A[i, i] for i in range(n)]
+    return [[A[i, i] for i in range(n)], eigenvectors]
