@@ -16,8 +16,6 @@ def power_iteration(matrix, vector, tol=1e-6, max_iterations=1000):
     #round to tol
     eigenvalue = (vector.T * matrix * vector)[0,0] / (vector.T * vector)[0,0]
     eigenvalue = round(eigenvalue.evalf(), 5)
-    
+    vector /= vector[vector.shape[0] -1]
     eigenvector = [round(elem.evalf(), 5) for elem in vector] 
-
     return [eigenvalue, eigenvector]
-
