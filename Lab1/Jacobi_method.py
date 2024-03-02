@@ -9,24 +9,24 @@ def jacobi_method(A, tol=1e-6, max_iterations=1000):
     for i in range(max_iterations):
 
         max_off_diag = 0
-        x, y = None, None
+        row, col = None, None
         for i in range(n):
             for j in range(n):
                 if abs(A[i, j]) > max_off_diag and i != j:
                     max_off_diag = abs(A[i, j])
-                    x,y = i, j
+                    row,col = i, j
 
         # Check for convergence
         if max_off_diag < tol or i >= max_iterations:
             break
 
-        phi = 0.5 * atan((2 * A[x, y]) / (A[y, y] - A[x, x]))
+        phi = 0.5 * atan((2 * A[row, col]) / (A[col, col] - A[row, row]))
 
         Q = Matrix.eye(n)
-        Q[x, x] = cos(phi)
-        Q[y, y] = cos(phi)
-        Q[x, y] = sin(phi)
-        Q[y, x] = -sin(phi)
+        Q[row, row] = cos(phi)
+        Q[col, col] = cos(phi)
+        Q[row, col] = sin(phi)
+        Q[col, row] = -sin(phi)
 
         A = Q.T * A * Q
         eigenvectors = eigenvectors * Q
