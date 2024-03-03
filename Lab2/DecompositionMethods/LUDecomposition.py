@@ -12,7 +12,7 @@ def ludecomposition(matrix):
                 s += (L[i,k]*U[k,j])
             U[i,j]=matrix[i,j]-s
 
-        for j in range(i+1,n):
+        for j in range(i,n):
             s=0
             for k in range(i):
                 s += (L[j,k]*U[k,i])
