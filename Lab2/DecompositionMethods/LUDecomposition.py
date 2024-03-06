@@ -1,21 +1,17 @@
 import numpy as np
 
-def ludecomposition(matrix):
-    n = matrix.shape[0]
-    L = np.eye(n, dtype = int)
-    U = np.zeros((matrix.shape[0], matrix.shape[1]), dtype= int)
 
-    for i in range(n):
-        for j in range(i,n):
-            s=0
-            for k in range(i):
-                s += (L[i,k]*U[k,j])
-            U[i,j]=matrix[i,j]-s
+def lu_decomposition(matrix):
+    row_size, column_size = matrix.shape
+    if (row_size > column_size):
+        return None, None
+    L = np.eye(row_size)
+    U = np.zeros((row_size, column_size))
 
-        for j in range(i,n):
-            s=0
-            for k in range(i):
-                s += (L[j,k]*U[k,i])
-            L[j,i]=((1/U[i,i])*(matrix[j,i]-s))
-
-    return L,U
+    for row in range(row_size):
+        for column in range(column_size):
+            if row <= column:
+                U[row][column] = matrix[row][column] - np.sum(L[row, :row] * U[:row, column])
+            else:
+                L[row][column] = (matrix[row][column] - np.sum(L[row, :column] * U[:column, column])) / U[column][column]
+    return L, U
