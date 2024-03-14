@@ -2,9 +2,6 @@ import numpy as np
 
 def qr_decomposition(matrix):
     row_size, column_size = matrix.shape
-    
-
-    
     Q = np.eye(row_size, dtype=float)  
     matrix = matrix.astype(float)  
     R = matrix.copy() 
