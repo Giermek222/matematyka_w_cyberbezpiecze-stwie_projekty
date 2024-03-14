@@ -4,7 +4,7 @@ def gauss_seidel_method(A, b, x0, tol=1e-6, max_iter=1000):
     n = len(b)
     iterations = 0
     x = np.float64(x0.copy()) 
-    x_new = np.float64(np.zeros_like(x))
+    x_new = np.float64(np.zeros_like(x0))
 
     while iterations < max_iter:
         
