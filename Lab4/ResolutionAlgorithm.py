@@ -1,7 +1,7 @@
 from sympy import symbols, Or, Not, And
 from sympy.logic.boolalg import to_cnf, Or
 
-def resolution(CNF):
+def is_solvable(CNF):
     clauses = list(CNF.args)
 
     while True:
@@ -12,12 +12,12 @@ def resolution(CNF):
                 resolvents = resolve(clauses[i], clauses[j])
 
                 if False in resolvents:
-                    return True  # formula is unsolvable
+                    return False  # formula is unsolvable
 
                 new_clauses.update(resolvents)
 
         if new_clauses.issubset(clauses):
-            return False  # formula is solvable if it has any elements left after resolution
+            return True  # formula is solvable if it has any elements left after resolution
 
         clauses.extend(new_clauses)
 
@@ -40,5 +40,5 @@ if __name__ == "__main__":
     CNF2 = to_cnf(~P | Q)
 
    
-    result = resolution(And(CNF1, CNF2))
+    result = is_solvable(And(CNF1, CNF2))
     print("Contradiction Found!" if result else "No contradiction found.")
